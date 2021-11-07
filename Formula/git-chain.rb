@@ -1,12 +1,11 @@
-
 class GitChain < Formula
-  desc "Tool to rebase multiple Git branches based on the previous one."
+  desc "Tool to rebase multiple Git branches based on the previous one"
   homepage "https://github.com/Shopify/git-chain"
-  head "https://github.com/Shopify/git-chain.git"
   license "MIT"
+  head "https://github.com/Shopify/git-chain.git"
 
-  depends_on "ruby"
   depends_on "git"
+  depends_on "ruby"
 
   def install
     rm_f "bin/console"
