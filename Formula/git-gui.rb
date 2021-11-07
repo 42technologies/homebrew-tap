@@ -1,31 +1,44 @@
 class GitGui < Formula
   desc "Tcl/Tk UI for the git revision control system"
   homepage "https://git-scm.com"
-
   # NOTE: Please keep these values in sync with git.rb when updating.
-  desc "Tcl/Tk UI for the git revision control system"
-  homepage "https://git-scm.com"
-  head "https://github.com/git/git.git", shallow: false
+  url "https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.33.1.tar.xz"
+  sha256 "e054a6e6c2b088bd1bff5f61ed9ba5aa91c9a3cd509539a4b41c5ddf02201f2f"
+  license "GPL-2.0-only"
+  head "https://github.com/git/git.git"
 
-  # bottle do
-  #   cellar :any_skip_relocation
-  #   sha256 "710dcb76f28cd72e89b6cb03b54cc5b7ad226dd5b3c43acfb0c83e92a2ae8347" => :big_sur
-  #   sha256 "8820d3ab3fb92d495faf6f3c784122f27bc8ccc4648f84812a695030f22d388c" => :catalina
-  #   sha256 "42223e9dfd4b55352cdbb53b003b88b5e5f09fbf0e8e333bc903271ae7fa14b0" => :mojave
-  #   sha256 "aa2b5c16d09f78e9a01f9c3b92086bd3933b36eef6e1a94e634f67966c323d9e" => :high_sierra
-  # end
+  livecheck do
+    formula "git"
+  end
+
+  bottle do
+    sha256 cellar: :any_skip_relocation, all: "870dac917bc731120df164d6d54482ceec9090802a2b62ed0df1b2cbb349529d"
+  end
 
   depends_on "tcl-tk"
+
+  # Patch to fix Homebrew/homebrew-core#68798.
+  # Remove when the following PR has been merged
+  # and included in a release:
+  # https://github.com/git/git/pull/944
+  patch do
+    url "https://github.com/git/git/commit/1db62e44b7ec93b6654271ef34065b31496cd02e.patch?full_index=1"
+    sha256 "0c7816ee9c8ddd7aa38aa29541c9138997650713bce67bdef501b1de0b50f539"
+  end
+
+  # gitk: custom patches
+  patch do
+    url "https://github.com/surjikal/git/commit/gitk-show-all-stashes.patch?full_index=1"
+    sha256 "2dbfe5ae0c563e44e99829d6c23595217389dd41e971cbf92f0c40fc3717b2c6"
+  end
+  patch do
+    url "https://github.com/surjikal/git/commit/gitk-set-reset-hard-default.patch?full_index=1"
+    sha256 "064fd387cbe89e8e5cb0d4b667d2d420ed148b710afc99a54b3631044707cad6"
+  end
 
   def install
     # build verbosely
     ENV["V"] = "1"
-
-    system "ls"
-    system "rm", "-r", "git-gui"
-    system "rm", "-r", "gitk-git"
-    system "git", "clone", "https://github.com/prati0100/git-gui.git", "git-gui"
-    system "git", "clone", "git://ozlabs.org/~paulus/gitk.git", "gitk-git"
 
     # By setting TKFRAMEWORK to a non-existent directory we ensure that
     # the git makefiles don't install a .app for git-gui
