@@ -1,18 +1,17 @@
 class GitGui < Formula
   desc "Tcl/Tk UI for the git revision control system"
   homepage "https://git-scm.com"
-  # NOTE: Please keep these values in sync with git.rb when updating.
-  url "https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.33.1.tar.xz"
-  sha256 "e054a6e6c2b088bd1bff5f61ed9ba5aa91c9a3cd509539a4b41c5ddf02201f2f"
+  #url "https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.36.1.tar.xz"
+  #sha256 "405d4a0ff6e818d1f12b3e92e1ac060f612adcb454f6299f70583058cb508370"
   license "GPL-2.0-only"
-  head "https://github.com/git/git.git"
+  head "https://github.com/surjikal/git.git", branch: "master"
 
   livecheck do
     formula "git"
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "870dac917bc731120df164d6d54482ceec9090802a2b62ed0df1b2cbb349529d"
+    sha256 cellar: :any_skip_relocation, all: "f81fbb5712226c0bc86b93df3b0907b9633ffcf571b4c94a1fd064b98e20e39e"
   end
 
   depends_on "tcl-tk"
@@ -21,20 +20,21 @@ class GitGui < Formula
   # Remove when the following PR has been merged
   # and included in a release:
   # https://github.com/git/git/pull/944
-  patch do
-    url "https://github.com/git/git/commit/1db62e44b7ec93b6654271ef34065b31496cd02e.patch?full_index=1"
-    sha256 "0c7816ee9c8ddd7aa38aa29541c9138997650713bce67bdef501b1de0b50f539"
-  end
+  #patch do
+  #  url "https://github.com/git/git/commit/1db62e44b7ec93b6654271ef34065b31496cd02e.patch?full_index=1"
+  #  sha256 "0c7816ee9c8ddd7aa38aa29541c9138997650713bce67bdef501b1de0b50f539"
+  #end
 
   # gitk: custom patches
-  patch do
-    url "https://github.com/surjikal/git/commit/gitk-show-all-stashes.patch?full_index=1"
-    sha256 "2dbfe5ae0c563e44e99829d6c23595217389dd41e971cbf92f0c40fc3717b2c6"
-  end
-  patch do
-    url "https://github.com/surjikal/git/commit/gitk-set-reset-hard-default.patch?full_index=1"
-    sha256 "064fd387cbe89e8e5cb0d4b667d2d420ed148b710afc99a54b3631044707cad6"
-  end
+  #patch do
+  #  url "https://github.com/surjikal/git/commit/gitk-show-all-stashes.patch?full_index=1"
+  #  sha256 "2dbfe5ae0c563e44e99829d6c23595217389dd41e971cbf92f0c40fc3717b2c6"
+  #end
+
+  #patch do
+  #  url "https://github.com/surjikal/git/commit/master.patch?full_index=1"
+    # sha256 "064fd387cbe89e8e5cb0d4b667d2d420ed148b710afc99a54b3631044707cad6"
+  #end
 
   def install
     # build verbosely
