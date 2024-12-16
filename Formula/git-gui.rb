@@ -14,7 +14,7 @@ class GitGui < Formula
     sha256 cellar: :any_skip_relocation, all: "f81fbb5712226c0bc86b93df3b0907b9633ffcf571b4c94a1fd064b98e20e39e"
   end
 
-  depends_on "tcl-tk"
+  depends_on "surjikal/tap/tcl-tk"
 
   # Patch to fix Homebrew/homebrew-core#68798.
   # Remove when the following PR has been merged
