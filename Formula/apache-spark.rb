@@ -1,10 +1,11 @@
 class ApacheSpark < Formula
   desc "Engine for large-scale data processing"
   homepage "https://spark.apache.org/"
-  url "https://dlcdn.apache.org/spark/spark-3.2.3/spark-3.2.3-bin-hadoop3.2.tgz"
-  version "3.2.3"
+  url "https://dlcdn.apache.org/spark/spark-3.3.3/spark-3.3.3-bin-hadoop3.tgz"
+  mirror "https://archive.apache.org/dist/spark/spark-3.3.3/spark-3.3.3-bin-hadoop3.tgz"
+  version "3.3.3"
 
-  depends_on "openjdk"
+  depends_on "openjdk@17"
 
   def install
     # Rename beeline to distinguish it from hive's beeline
